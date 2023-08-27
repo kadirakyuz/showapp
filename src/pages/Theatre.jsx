@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
 import etkinlikler from '../../etkinlikler.json';
+import { Searchbar } from 'react-native-paper';
+import TopBarDes from '../design/TopBarDes';
 
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
@@ -18,13 +20,14 @@ const Theatre = () => {
   };
 
   useEffect(() => {
-    handleSearch(searchQuery); // Sayfa yüklendiğinde filtrelemeyi başlat
-  }, []); // Boş bir bağımlılık dizisi vererek sayfa yüklendiğinde sadece bir kez çalışmasını sağla
+    handleSearch(searchQuery);  
+  }, []);  
 
   return (
     <View style={styles.container}>
-      <View style={styles.searchBar}>
-        <TextInput
+      <TopBarDes/>
+       <View style={styles.searchBar}>
+        <Searchbar
           placeholder='Arayın..' 
           clearButtonMode='always' 
           autoCapitalize='none' 
@@ -61,17 +64,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'black',
-    borderWidth: 1,
+     
     height: 40,
-    marginHorizontal: 5,
-    marginTop: 5,
-    borderRadius: 15,
-    marginBottom: -15,
+    marginHorizontal: 15,
+    marginTop: 25,
+     
+  
   },
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 20,
+    padding:10,
+    paddingTop:15,
   },
   sectionTitle: {
     fontSize: 24,

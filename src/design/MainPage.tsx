@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
-import TodoList from './NullArea';
-import ProfileScreen from './Archive';
-import AddingTaskArea from './InfoArea';
-import NullArea from './NullArea';
-import InfoArea from './InfoArea';
-import Archive from './Archive';
- import { createStackNavigator } from '@react-navigation/stack';
+import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
+import Iconnn from 'react-native-vector-icons/FontAwesome6';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Cinema from '../pages/Cinema';
+import Theatre from '../pages/Theatre';
+import InfoArea from './InfoArea';
+import Concert from '../pages/Concert';
+import Any from '../pages/Any';
 
- const Stack = createStackNavigator();
- const Tab = createBottomTabNavigator();
+
+const Tab = createBottomTabNavigator();
+
 const MainPage = () => {
   const [selectedTab, setSelectedTab] = useState('NullArea');
 
@@ -23,55 +24,69 @@ const MainPage = () => {
     return selectedTab === tabName ? 'black' : '#0c99eb';
   };
 
-  return (<>
-    
+  return (
     <NavigationContainer>
       <Tab.Navigator>
         <Tab.Screen
-          name="NullArea"
-          component={NullArea}
+          name="Theatre"
+          component={Theatre}
           listeners={{
-            tabPress: () => handleTabPress('NullArea'),
+            tabPress: () => handleTabPress('Theatre'),
           }}
           options={{
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: ({ size }) => (
-              <Icon name="grid" size={30} color={getTabColor('NullArea')} />
+              <Iconnn name="masks-theater" size={30} color={getTabColor('Theatre')} />
             ),
           }}
         />
         <Tab.Screen
-          name="Archive"
-          component={Archive}
+          name="Cinema"
+          component={Cinema}
           listeners={{
-            tabPress: () => handleTabPress('Archive'),
+            tabPress: () => handleTabPress('Cinema'),
           }}
           options={{
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Icon name="archive" size={30} color={getTabColor('Archive')} />
+              <Iconn name="movie-open" size={30} color={getTabColor('Cinema')} />
             ),
           }}
         />
-        <Tab.Screen
-          name="InfoArea"
-          component={InfoArea}
+        
+         <Tab.Screen
+          name="Concert"
+          component={Concert}
           listeners={{
-            tabPress: () => handleTabPress('InfoArea'),
+            tabPress: () => handleTabPress('Concert'),
           }}
           options={{
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Icon name="info" size={30} color={getTabColor('InfoArea')} />
+              <Iconn name="music-clef-treble" size={30} color={getTabColor('Concert')} />
             ),
           }}
-        />
+        /> 
+        <Tab.Screen
+          name="Any"
+          component={Any}
+          listeners={{
+            tabPress: () => handleTabPress('Any'),
+          }}
+          options={{
+            headerShown: false,
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <Iconn name="ticket" size={30} color={getTabColor('Any')} />
+            ),
+          }}
+        /> 
       </Tab.Navigator>
     </NavigationContainer>
-    </>);
+  );
 };
 
 export default MainPage;

@@ -12,7 +12,7 @@ const Theatre = () => {
     setSearchQuery(query);
 
     const filteredData = etkinlikler.filter(item =>
-      item.Tur === 'SİNEMA' &&
+      item.Tur === 'DİĞER' &&
       item.Adi.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -37,7 +37,7 @@ const Theatre = () => {
         />
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Sinema</Text>
+        <Text style={styles.sectionTitle}>Tiyatro</Text>
       </View>
       <FlatList
         data={veri}

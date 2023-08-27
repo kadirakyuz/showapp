@@ -7,9 +7,7 @@ import Theatre from '../pages/Theatre';
 function NullArea() {
   return (
     <View style={styles.areaDesign}>
-      <View style={{ flex: 0.11 }}>
-        <TopBarDes />
-      </View>
+       <TopBarDes/>
       
       <View style={styles.textAreaDesign}>
        
