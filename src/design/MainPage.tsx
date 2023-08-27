@@ -9,12 +9,13 @@ import Theatre from '../pages/Theatre';
 import InfoArea from './InfoArea';
 import Concert from '../pages/Concert';
 import Any from '../pages/Any';
+import MaskedView from '@react-native-community/masked-view'
 
 
 const Tab = createBottomTabNavigator();
 
 const MainPage = () => {
-  const [selectedTab, setSelectedTab] = useState('NullArea');
+  const [selectedTab, setSelectedTab] = useState('Theatre');
 
   const handleTabPress = (tabName: React.SetStateAction<string>) => {
     setSelectedTab(tabName);
@@ -26,8 +27,8 @@ const MainPage = () => {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen
+      <Tab.Navigator >
+        <Tab.Screen 
           name="Theatre"
           component={Theatre}
           listeners={{
