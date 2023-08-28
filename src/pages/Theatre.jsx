@@ -38,6 +38,16 @@ const Theatre = () => {
     setVeri(sortedVeri);
     setHasSort(!hasSort);
   };
+  const sortByDate = () => {
+    let sortedVeri = [...veri];
+    if (!hasSort) {
+      sortedVeri.sort((a, b) => a.EtkinlikBaslamaTarihi.localeCompare(b.EtkinlikBaslamaTarihi));
+    } else {
+      sortedVeri.sort((a, b) => b.EtkinlikBaslamaTarihi.localeCompare(a.EtkinlikBaslamaTarihi));
+    }
+    setVeri(sortedVeri);
+    setHasSort(!hasSort);
+  };
 
   return (
     <Provider>
@@ -58,8 +68,8 @@ const Theatre = () => {
             onDismiss={closeMenu}
             anchor={<Button style={{borderColor:'#c22f89',borderWidth:1,height:40,}} icon='sort' onPress={openMenu}></Button>}
           >
-            <Menu.Item onPress={sortByName } title="İsime Göre" />
-             
+            <Menu.Item onPress={sortByName } title="İsim" />
+            <Menu.Item onPress={sortByDate } title="Tarih" />
           </Menu>
         </View>
         <View style={styles.section}>
