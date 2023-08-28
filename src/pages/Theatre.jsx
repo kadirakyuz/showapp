@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import etkinlikler from '../../etkinlikler.json';
-import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
+import { Searchbar, Button, Menu, Divider, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
+  const [hasSort, setHasSort] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const openMenu = () => setVisible(true);
@@ -29,8 +30,13 @@ const Theatre = () => {
 
   const sortByName = () => {
     let sortedVeri = [...veri];
-    sortedVeri.sort((a, b) => a.Adi.localeCompare(b.Adi));
+    if (!hasSort) {
+      sortedVeri.sort((a, b) => a.Adi.localeCompare(b.Adi));
+    } else {
+      sortedVeri.sort((a, b) => b.Adi.localeCompare(a.Adi));
+    }
     setVeri(sortedVeri);
+    setHasSort(!hasSort);
   };
 
   return (
@@ -50,18 +56,10 @@ const Theatre = () => {
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={
-              <Button
-                style={styles.sortButton}
-                onPress={openMenu}
-                icon="sort"
-                mode="outlined"
-              >
-                
-              </Button>
-            }
+            anchor={<Button style={{borderColor:'#c22f89',borderWidth:1,height:40,justifyContent:'center'}} icon='sort' onPress={openMenu}>Sırala</Button>}
           >
-            <Menu.Item onPress={sortByName} title="İsime Göre" />
+            <Menu.Item onPress={sortByName } title="İsime Göre" />
+             
           </Menu>
         </View>
         <View style={styles.section}>
@@ -90,9 +88,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBar: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: 'row', // Yeni satır
+    justifyContent: 'space-between', // Yeni satır
+    alignItems: 'center', // Yeni satır
     borderColor: 'black',
     height: 40,
     marginHorizontal: 15,
@@ -142,17 +140,8 @@ const styles = StyleSheet.create({
     borderColor: '#c22f89',
     borderWidth: 1,
     paddingHorizontal: 10,
-    width: 310,
-    height: 60,
-  
-  },
-  sortButton: {
-    borderColor: '#c22f89',
-    borderWidth: 1,
-    width:40,
-  
-    alignItems:'center',
-    justifyContent: 'center',
+    width: 310, // Örnek genişlik değeri
+    height:60,
   },
 });
 
