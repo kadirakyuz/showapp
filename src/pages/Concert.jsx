@@ -37,7 +37,7 @@ const Theatre = () => {
         />
       </View>
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Konser</Text>
+        <Text style={styles.sectionTitle}>KONSER</Text>
       </View>
       <FlatList
         data={veri}
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '900',
-    color: '#0c99eb',
+    color: '#8c2ed9',
   },
   itemContainer: {
     flexDirection: 'row',

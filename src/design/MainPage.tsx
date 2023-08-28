@@ -22,7 +22,7 @@ const MainPage = () => {
   };
 
   const getTabColor = (tabName: string) => {
-    return selectedTab === tabName ? 'black' : '#0c99eb';
+    return selectedTab === tabName ? '#e0a510' : '#c22f89';
   };
 
   return (
