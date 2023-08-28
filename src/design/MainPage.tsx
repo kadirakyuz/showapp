@@ -10,6 +10,7 @@ import InfoArea from './InfoArea';
 import Concert from '../pages/Concert';
 import Any from '../pages/Any';
 import MaskedView from '@react-native-community/masked-view'
+import Iconnnn from 'react-native-vector-icons/Foundation';
 
 
 const Tab = createBottomTabNavigator();
@@ -27,6 +28,7 @@ const MainPage = () => {
 
   return (
     <NavigationContainer>
+      
       <Tab.Navigator >
         <Tab.Screen 
           name="Theatre"
@@ -82,6 +84,20 @@ const MainPage = () => {
             tabBarLabel: '',
             tabBarIcon: () => (
               <Iconn name="ticket" size={30} color={getTabColor('Any')} />
+            ),
+          }}
+        /> 
+         <Tab.Screen
+          name="InfoArea"
+          component={InfoArea}
+          listeners={{
+            tabPress: () => handleTabPress('InfoArea'),
+          }}
+          options={{
+            headerShown: false,
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <Iconnnn name="info" size={30} color={getTabColor('InfoArea')} />
             ),
           }}
         /> 

@@ -7,7 +7,7 @@ import axios from 'axios';
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
-
+const [data, setdata] = useState('');
   const handleSearch = (query) => {
     setSearchQuery(query);
 
