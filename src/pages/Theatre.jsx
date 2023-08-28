@@ -74,7 +74,7 @@ const Theatre = () => {
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={<Button  icon='sort' size={30} onPress={openMenu}></Button>}
+            anchor={<Button  icon='sort' size={50} onPress={openMenu}></Button>}
           >
             <Menu.Item onPress={sortByName } title="İsim" />
             <Menu.Item onPress={sortByDate } title="Tarih" />
@@ -90,10 +90,10 @@ const Theatre = () => {
             <View style={styles.itemContainer}>
               <Image source={{ uri: item.Resim }} style={styles.image} />
               <View style={styles.infoContainer}>
-                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039' }}>{item.Adi}</Text>
+                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5}}>{item.UcretsizMi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5}}> Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
                 <View style={{justifyContent:'center',alignItems:'center',}}>
                 <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                   <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
+    alignItems:'center',
+    justifyContent: 'center',
   },
    
   searchBarStyle: {
