@@ -1,62 +1,87 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
 import etkinlikler from '../../etkinlikler.json';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
-import axios from 'axios';
+
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
-const [data, setdata] = useState('');
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
+
   const handleSearch = (query) => {
     setSearchQuery(query);
 
-    const filteredData = etkinlikler.filter(item =>
-      item.Tur === 'TİYATRO' &&
-      item.Adi.toLowerCase().includes(query.toLowerCase())
+    const filteredData = etkinlikler.filter(
+      (item) =>
+        item.Tur === 'TİYATRO' && item.Adi.toLowerCase().includes(query.toLowerCase())
     );
 
     setVeri(filteredData);
   };
- 
+
   useEffect(() => {
-    handleSearch(searchQuery);  
-  }, []);  
-  axios.get (`https://northwind.vercel.app/api/products`) // link parametresi
-  .then 
-        (res => { 
-          const data = res.data;  
-        })
+    handleSearch(searchQuery);
+  }, [searchQuery]);
+
+  const sortByName = () => {
+    let sortedVeri = [...veri];
+    sortedVeri.sort((a, b) => a.Adi.localeCompare(b.Adi));
+    setVeri(sortedVeri);
+  };
+
   return (
-    <View style={styles.container}>
-      <TopBarDes/>
-       <View style={styles.searchBar}>
-        <Searchbar
-          placeholder='Arayın..' 
-          clearButtonMode='always' 
-          autoCapitalize='none' 
-          autoCorrect={false} 
-          value={searchQuery} 
-          onChangeText={handleSearch}
+    <Provider>
+      <View style={styles.container}>
+        <TopBarDes />
+        <View style={styles.searchBar}>
+          <Searchbar
+            placeholder="Arayın.."
+            clearButtonMode="always"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={searchQuery}
+            onChangeText={handleSearch}
+            style={styles.searchBarStyle}
+          />
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={
+              <Button
+                style={styles.sortButton}
+                onPress={openMenu}
+                icon="sort"
+                mode="outlined"
+              >
+                
+              </Button>
+            }
+          >
+            <Menu.Item onPress={sortByName} title="İsime Göre" />
+          </Menu>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>TİYATRO</Text>
+        </View>
+        <FlatList
+          data={veri}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <Image source={{ uri: item.Resim }} style={styles.image} />
+              <View style={styles.infoContainer}>
+                <Text style={styles.eventName}>{item.Adi}</Text>
+                <Text>{item.EtkinlikBaslamaTarihi}</Text>
+              </View>
+            </View>
+          )}
         />
       </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>TİYATRO</Text>
-      </View>
-      <FlatList
-        data={veri}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Image source={{ uri: item.Resim }} style={styles.image} />
-            <View style={styles.infoContainer}>
-              <Text style={styles.eventName}>{item.Adi}</Text>
-              <Text>{item.EtkinlikBaslamaTarihi}</Text>
-            </View>
-          </View>
-        )}
-      />
-    </View>
+    </Provider>
   );
 };
 
@@ -65,21 +90,19 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBar: {
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: 'black',
-     
     height: 40,
     marginHorizontal: 15,
     marginTop: 25,
-     
-  
   },
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding:10,
-    paddingTop:15,
+    padding: 10,
+    paddingTop: 15,
   },
   sectionTitle: {
     fontSize: 24,
@@ -112,6 +135,24 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     marginBottom: 5,
+  },
+  searchBarStyle: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    borderColor: '#c22f89',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    width: 310,
+    height: 60,
+  
+  },
+  sortButton: {
+    borderColor: '#c22f89',
+    borderWidth: 1,
+    width:40,
+  
+    alignItems:'center',
+    justifyContent: 'center',
   },
 });
 

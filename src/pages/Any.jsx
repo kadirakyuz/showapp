@@ -12,7 +12,7 @@ const Theatre = () => {
     setSearchQuery(query);
 
     const filteredData = etkinlikler.filter(item =>
-      item.Tur === 'DİĞER' &&
+      (item.Tur === 'DİĞER' || item.Tur === 'SERGİ') &&
       item.Adi.toLowerCase().includes(query.toLowerCase())
     );
 
