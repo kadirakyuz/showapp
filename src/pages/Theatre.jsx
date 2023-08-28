@@ -35,9 +35,10 @@ const Theatre = () => {
     } else {
       sortedVeri.sort((a, b) => b.Adi.localeCompare(a.Adi));
     }
-    setVeri(sortedVeri);
-    setHasSort(!hasSort);
+    setHasSort(true); // Değişiklik burada
+    setVeri(sortedVeri); // Sıralama işlemi burada
   };
+  
   const sortByDate = () => {
     let sortedVeri = [...veri];
     if (!hasSort) {
@@ -45,8 +46,8 @@ const Theatre = () => {
     } else {
       sortedVeri.sort((a, b) => b.EtkinlikBaslamaTarihi.localeCompare(a.EtkinlikBaslamaTarihi));
     }
-    setVeri(sortedVeri);
-    setHasSort(!hasSort);
+    setHasSort(true); // Değişiklik burada
+    setVeri(sortedVeri); // Sıralama işlemi burada
   };
 
   return (
