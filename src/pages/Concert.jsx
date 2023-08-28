@@ -1,58 +1,109 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } from 'react-native';
 import etkinlikler from '../../etkinlikler.json';
-import { Searchbar } from 'react-native-paper';
+import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
+  const [hasSort, setHasSort] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  const openMenu = () => setVisible(true);
+  const closeMenu = () => setVisible(false);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
 
-    const filteredData = etkinlikler.filter(item =>
-      item.Tur === 'KONSER' &&
-      item.Adi.toLowerCase().includes(query.toLowerCase())
+    const filteredData = etkinlikler.filter(
+      (item) =>
+        item.Tur === 'KONSER' && item.Adi.toLowerCase().includes(query.toLowerCase())
     );
 
     setVeri(filteredData);
   };
 
   useEffect(() => {
-    handleSearch(searchQuery);  
-  }, []);  
+    handleSearch(searchQuery);
+  }, [searchQuery]);
 
+  const sortByName = () => {
+    let sortedVeri = [...veri];
+    if (!hasSort) {
+      sortedVeri.sort((a, b) => a.Adi.localeCompare(b.Adi));
+    } else {
+      sortedVeri.sort((a, b) => b.Adi.localeCompare(a.Adi));
+    }
+    setHasSort(true);
+    setVeri(sortedVeri);
+  };
+  
+  const sortByDate = () => {
+    let sortedVeri = [...veri];
+    if (!hasSort) {
+      sortedVeri.sort((a, b) => a.EtkinlikBaslamaTarihi.localeCompare(b.EtkinlikBaslamaTarihi));
+    } else {
+      sortedVeri.sort((a, b) => b.EtkinlikBaslamaTarihi.localeCompare(a.EtkinlikBaslamaTarihi));
+    }
+    setHasSort(true);
+    setVeri(sortedVeri);
+  };
+  const openEventUrl = (url) => {
+    if (url) {
+      const baseUrl = 'https://kultursanat.izmir.bel.tr/Etkinlikler/';
+      const addingUrl = url;
+      const fullUrl = baseUrl + addingUrl;
+      Linking.openURL(fullUrl);
+    }
+  };
   return (
-    <View style={styles.container}>
-      <TopBarDes/>
-       <View style={styles.searchBar}>
-        <Searchbar
-          placeholder='Arayın..' 
-          clearButtonMode='always' 
-          autoCapitalize='none' 
-          autoCorrect={false} 
-          value={searchQuery} 
-          onChangeText={handleSearch}
+    <Provider>
+      <View style={styles.container}>
+        <TopBarDes />
+        <View style={styles.searchBar}>
+          <Searchbar
+            placeholder="Arayın.."
+            clearButtonMode="always"
+            autoCapitalize="none"
+            autoCorrect={false}
+            value={searchQuery}
+            onChangeText={handleSearch}
+            style={styles.searchBarStyle}
+          />
+          <Menu
+            visible={visible}
+            onDismiss={closeMenu}
+            anchor={<Button  icon='sort' size={50} onPress={openMenu}></Button>}
+          >
+            <Menu.Item onPress={sortByName } title="İsim" />
+            <Menu.Item onPress={sortByDate } title="Tarih" />
+          </Menu>
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>KONSER</Text>
+        </View>
+        <FlatList
+          data={veri}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <Image source={{ uri: item.Resim }} style={styles.image} />
+              <View style={styles.infoContainer}>
+                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}> Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
+                <View style={{justifyContent:'center',alignItems:'center',}}>
+                <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
+                  </View>
+              </View>
+            </View>
+          )}
         />
       </View>
-      <View style={styles.section}>
-        <Text style={styles.sectionTitle}>KONSER</Text>
-      </View>
-      <FlatList
-        data={veri}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Image source={{ uri: item.Resim }} style={styles.image} />
-            <View style={styles.infoContainer}>
-              <Text style={styles.eventName}>{item.Adi}</Text>
-              <Text>{item.EtkinlikBaslamaTarihi}</Text>
-            </View>
-          </View>
-        )}
-      />
-    </View>
+    </Provider>
   );
 };
 
@@ -61,21 +112,21 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBar: {
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: 'black',
+    height: 20,
+    marginTop:35,
+    marginLeft:15,
+    marginBottom:20,
      
-    height: 40,
-    marginHorizontal: 15,
-    marginTop: 25,
-     
-  
   },
   section: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding:10,
-    paddingTop:15,
+    padding: 10,
+    paddingTop: 15,
   },
   sectionTitle: {
     fontSize: 24,
@@ -93,21 +144,27 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-    height: 200,
+    height: 220,
   },
   image: {
-    width: 175,
-    height: 175,
+    width: 200,
+    height: 200,
     marginRight: 10,
   },
   infoContainer: {
     flex: 1,
-    justifyContent: 'flex-start',
+    alignItems:'center',
+    justifyContent: 'center',
   },
-  eventName: {
-    fontSize: 16,
-    fontWeight: '700',
-    marginBottom: 5,
+   
+  searchBarStyle: {
+    backgroundColor: 'white',
+    borderRadius: 25,
+    borderColor: '#c22f89',
+    borderWidth: 1,
+    paddingHorizontal: 10,
+    width: 340,
+    height: 60,
   },
 });
 

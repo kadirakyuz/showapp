@@ -27,8 +27,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   topBarText: {
-    flex: 1, // Bu satır eklendi
-    textAlign: 'center', // Bu satır eklendi
+    flex: 1, 
+    textAlign: 'center',  
     fontSize: 24,
     fontWeight: '700',
     color: 'white',

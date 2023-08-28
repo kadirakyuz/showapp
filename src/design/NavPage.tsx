@@ -15,7 +15,7 @@ import Iconnnn from 'react-native-vector-icons/Foundation';
 
 const Tab = createBottomTabNavigator();
 
-const MainPage = () => {
+const NavPage = () => {
   const [selectedTab, setSelectedTab] = useState('Theatre');
 
   const handleTabPress = (tabName: React.SetStateAction<string>) => {
@@ -106,4 +106,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default NavPage;

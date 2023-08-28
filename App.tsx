@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
-import MainPage from './src/design/MainPage';
+import NavPage from './src/design/NavPage';
 import { createStackNavigator } from '@react-navigation/stack';
 import InfoArea from './src/design/InfoArea';
 
@@ -13,7 +13,7 @@ const App = () => {
   return  (<>
    
     
-    <MainPage></MainPage>
+    <NavPage></NavPage>
 
     
     </> )

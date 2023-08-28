@@ -93,7 +93,7 @@ const Theatre = () => {
                 <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5}}> Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
                 <View style={{justifyContent:'center',alignItems:'center',}}>
                 <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                   <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
@@ -153,15 +153,15 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    alignItems:'center',
-    justifyContent: 'center',
+    alignItems:'flex-start',
+    justifyContent: 'flex-start',
   },
    
   searchBarStyle: {
-    backgroundColor: 'white',
-    borderRadius: 25,
+     
+    borderRadius: 35,
     borderColor: '#c22f89',
-    borderWidth: 1,
+    borderWidth: 0.4,
     paddingHorizontal: 10,
     width: 340,
     height: 60,
