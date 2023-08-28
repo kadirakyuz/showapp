@@ -11,9 +11,11 @@ import Concert from '../pages/Concert';
 import Any from '../pages/Any';
 import MaskedView from '@react-native-community/masked-view'
 import Iconnnn from 'react-native-vector-icons/Foundation';
+import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
-const Tab = createBottomTabNavigator();
+const Tab = createMaterialBottomTabNavigator();
 
 const NavPage = () => {
   const [selectedTab, setSelectedTab] = useState('Theatre');
@@ -29,18 +31,19 @@ const NavPage = () => {
   return (
     <NavigationContainer>
       
-      <Tab.Navigator >
-        <Tab.Screen 
+      <Tab.Navigator barStyle={{ backgroundColor: 'white',height:60 }} >
+        <Tab.Screen   
           name="Theatre"
           component={Theatre}
           listeners={{
             tabPress: () => handleTabPress('Theatre'),
           }}
           options={{
+            
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: ({ size }) => (
-              <Iconnn name="masks-theater" size={30} color={getTabColor('Theatre')} />
+              <Iconnn name="masks-theater" size={25} color={getTabColor('Theatre')} />
             ),
           }}
         />
@@ -54,7 +57,7 @@ const NavPage = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Iconn name="movie-open" size={30} color={getTabColor('Cinema')} />
+              <Iconn name="movie-open" size={25} color={getTabColor('Cinema')} />
             ),
           }}
         />
@@ -69,7 +72,7 @@ const NavPage = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Iconn name="music-clef-treble" size={30} color={getTabColor('Concert')} />
+              <Iconn name="music-clef-treble" size={25} color={getTabColor('Concert')} />
             ),
           }}
         /> 
@@ -83,7 +86,7 @@ const NavPage = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Iconn name="ticket" size={30} color={getTabColor('Any')} />
+              <Iconn name="ticket" size={25} color={getTabColor('Any')} />
             ),
           }}
         /> 
@@ -97,7 +100,7 @@ const NavPage = () => {
             headerShown: false,
             tabBarLabel: '',
             tabBarIcon: () => (
-              <Iconnnn name="info" size={30} color={getTabColor('InfoArea')} />
+              <Iconnnn name="info" size={25} color={getTabColor('InfoArea')} />
             ),
           }}
         /> 

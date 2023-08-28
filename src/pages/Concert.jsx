@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } fro
 import etkinlikler from '../../etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
-
+import axios from 'axios';
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,6 +57,7 @@ const Theatre = () => {
       Linking.openURL(fullUrl);
     }
   };
+
   return (
     <Provider>
       <View style={styles.container}>
@@ -93,7 +94,7 @@ const Theatre = () => {
                 <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
                 <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}> Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
                 <View style={{justifyContent:'center',alignItems:'center',}}>
                 <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                   <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
@@ -127,11 +128,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     paddingTop: 15,
+    borderBottomWidth:1,
+    borderColor:'#F8049C',
+    marginBottom:10,
+    borderRadius:50,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '900',
-    color: '#8c2ed9',
+    color: '#F8049C',
+
   },
   itemContainer: {
     flexDirection: 'row',
@@ -153,15 +159,15 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     flex: 1,
-    alignItems:'center',
-    justifyContent: 'center',
+    alignItems:'flex-start',
+    justifyContent: 'flex-start',
   },
    
   searchBarStyle: {
-    backgroundColor: 'white',
-    borderRadius: 25,
+     
+    borderRadius: 35,
     borderColor: '#c22f89',
-    borderWidth: 1,
+    borderWidth: 0.4,
     paddingHorizontal: 10,
     width: 340,
     height: 60,

@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } fro
 import etkinlikler from '../../etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
-
+import axios from 'axios';
 const Theatre = () => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
@@ -57,6 +57,7 @@ const Theatre = () => {
       Linking.openURL(fullUrl);
     }
   };
+
   return (
     <Provider>
       <View style={styles.container}>
@@ -90,10 +91,10 @@ const Theatre = () => {
             <View style={styles.itemContainer}>
               <Image source={{ uri: item.Resim }} style={styles.image} />
               <View style={styles.infoContainer}>
-                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
+                <Text style={ {fontSize: 14, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
                 <View style={{justifyContent:'center',alignItems:'center',}}>
                 <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                   <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
@@ -149,11 +150,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-    height: 220,
+    height: 180,
   },
   image: {
-    width: 200,
-    height: 200,
+    width: 160,
+    height: 160,
     marginRight: 10,
   },
   infoContainer: {
