@@ -56,7 +56,7 @@ const Theatre = () => {
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={<Button style={{borderColor:'#c22f89',borderWidth:1,height:40,justifyContent:'center'}} icon='sort' onPress={openMenu}>Sırala</Button>}
+            anchor={<Button style={{borderColor:'#c22f89',borderWidth:1,height:40,}} icon='sort' onPress={openMenu}></Button>}
           >
             <Menu.Item onPress={sortByName } title="İsime Göre" />
              
