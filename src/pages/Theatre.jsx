@@ -127,11 +127,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     paddingTop: 15,
+    borderBottomWidth:1,
+    borderColor:'#F8049C',
+    marginBottom:10,
+    borderRadius:50,
   },
   sectionTitle: {
     fontSize: 24,
     fontWeight: '900',
-    color: '#8c2ed9',
+    color: '#F8049C',
+
   },
   itemContainer: {
     flexDirection: 'row',

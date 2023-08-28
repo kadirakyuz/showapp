@@ -20,12 +20,12 @@ const TopBarDes = () => {
 const styles = StyleSheet.create({
   topBarGradient: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-    height: 50,
+    height: 45,
     width: '100%',
     paddingHorizontal: 16,
-  },
+   },
   topBarText: {
     flex: 1, 
     textAlign: 'center',  
