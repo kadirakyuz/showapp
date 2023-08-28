@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } from 'react-native';
 import etkinlikler from '../../etkinlikler.json';
-import { Searchbar, Button, Menu, Divider, Provider } from 'react-native-paper';
+import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 
 const Theatre = () => {
@@ -35,8 +35,8 @@ const Theatre = () => {
     } else {
       sortedVeri.sort((a, b) => b.Adi.localeCompare(a.Adi));
     }
-    setHasSort(true); // Değişiklik burada
-    setVeri(sortedVeri); // Sıralama işlemi burada
+    setHasSort(true);
+    setVeri(sortedVeri);
   };
   
   const sortByDate = () => {
@@ -46,10 +46,17 @@ const Theatre = () => {
     } else {
       sortedVeri.sort((a, b) => b.EtkinlikBaslamaTarihi.localeCompare(a.EtkinlikBaslamaTarihi));
     }
-    setHasSort(true); // Değişiklik burada
-    setVeri(sortedVeri); // Sıralama işlemi burada
+    setHasSort(true);
+    setVeri(sortedVeri);
   };
-
+  const openEventUrl = (url) => {
+    if (url) {
+      const baseUrl = 'https://kultursanat.izmir.bel.tr/Etkinlikler/';
+      const addingUrl = url;
+      const fullUrl = baseUrl + addingUrl;
+      Linking.openURL(fullUrl);
+    }
+  };
   return (
     <Provider>
       <View style={styles.container}>
@@ -67,7 +74,7 @@ const Theatre = () => {
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={<Button style={{borderColor:'#c22f89',borderWidth:1,height:40,}} icon='sort' onPress={openMenu}></Button>}
+            anchor={<Button  icon='sort' size={30} onPress={openMenu}></Button>}
           >
             <Menu.Item onPress={sortByName } title="İsim" />
             <Menu.Item onPress={sortByDate } title="Tarih" />
@@ -83,8 +90,14 @@ const Theatre = () => {
             <View style={styles.itemContainer}>
               <Image source={{ uri: item.Resim }} style={styles.image} />
               <View style={styles.infoContainer}>
-                <Text style={styles.eventName}>{item.Adi}</Text>
-                <Text>{item.EtkinlikBaslamaTarihi}</Text>
+                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039' }}>{item.Adi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
+                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5}}>{item.UcretsizMi}</Text>
+                <View style={{justifyContent:'center',alignItems:'center',}}>
+                <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
+                  </View>
               </View>
             </View>
           )}
@@ -99,13 +112,15 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   searchBar: {
-    flexDirection: 'row', // Yeni satır
-    justifyContent: 'space-between', // Yeni satır
-    alignItems: 'center', // Yeni satır
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     borderColor: 'black',
-    height: 40,
-    marginHorizontal: 15,
-    marginTop: 25,
+    height: 20,
+    marginTop:35,
+    marginLeft:15,
+    marginBottom:20,
+     
   },
   section: {
     justifyContent: 'center',
@@ -129,30 +144,26 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-    height: 200,
+    height: 220,
   },
   image: {
-    width: 175,
-    height: 175,
+    width: 200,
+    height: 200,
     marginRight: 10,
   },
   infoContainer: {
     flex: 1,
     justifyContent: 'flex-start',
   },
-  eventName: {
-    fontSize: 16,
-    fontWeight: '700',
-    marginBottom: 5,
-  },
+   
   searchBarStyle: {
     backgroundColor: 'white',
     borderRadius: 25,
     borderColor: '#c22f89',
     borderWidth: 1,
     paddingHorizontal: 10,
-    width: 310, // Örnek genişlik değeri
-    height:60,
+    width: 340,
+    height: 60,
   },
 });
 
