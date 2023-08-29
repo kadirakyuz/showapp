@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } from 'react-native';
-import etkinlikler from '../../etkinlikler.json';
+import etkinlikler from './../json/etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 import axios from 'axios';
@@ -89,7 +89,7 @@ const Theatre = () => {
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
-              <Image source={{ uri: item.Resim }} style={styles.image} />
+              <Image resizeMode='contain' source={{ uri: item.Resim }} style={styles.image} />
               <View style={styles.infoContainer}>
                 <Text style={ {fontSize: 14, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
                 <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
    
   searchBarStyle: {
-     
+    backgroundColor:'white',
     borderRadius: 35,
     borderColor: '#c22f89',
     borderWidth: 0.4,

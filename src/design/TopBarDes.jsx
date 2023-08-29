@@ -12,7 +12,7 @@ const TopBarDes = () => {
       colors={['#FFD521', '#F50000', '#B900B4']}
       style={styles.topBarGradient}
     >
-      <Text style={styles.topBarText}>Show Time!  <Iconnn name="slideshow" size={30} /> </Text>
+      <Text style={styles.topBarText}>Show Time!  </Text>
       
     </LinearGradient>
   );

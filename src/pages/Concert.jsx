@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } from 'react-native';
-import etkinlikler from '../../etkinlikler.json';
+import etkinlikler from './../json/etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 import axios from 'axios';
