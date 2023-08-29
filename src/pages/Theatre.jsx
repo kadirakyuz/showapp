@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
   image: {
     width: 160,
     height: 160,
-    marginRight: 10,
+    marginLeft:-10,
   },
   infoContainer: {
     flex: 1,
