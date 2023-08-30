@@ -9,7 +9,7 @@ const TopBarDes = () => {
     <LinearGradient
       start={{ x: 0.0, y: 0.25 }}
       end={{ x: 0.9, y: 3 }}
-      colors={['#feda75', '#fa7e1e', '#d62976','#962fbf', '#4f5bd5']}
+      colors={['#ffd366', '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
       style={styles.topBarGradient}
     >
       <Text style={styles.topBarText}>ShowApp</Text>
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily:'Pacifico-Regular',
     color: 'white',
+    borderWidth:0,
     
   },
 });
