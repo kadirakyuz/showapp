@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity,Linking,StatusBar } from 'react-native';
 import etkinlikler from './../json/etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
+import LinearGradient from 'react-native-linear-gradient';
+import { LinearTextGradient } from "react-native-text-gradient";
+import SystemNavigationBar from 'react-native-system-navigation-bar';
+import MapView from 'react-native-maps';
+
 import axios from 'axios';
+StatusBar.setHidden(true);
+SystemNavigationBar.stickyImmersive();
+
 const Theatre = () => {
+  
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSort, setHasSort] = useState(false);
@@ -75,30 +84,43 @@ const Theatre = () => {
           <Menu
             visible={visible}
             onDismiss={closeMenu}
-            anchor={<Button  icon='sort' size={50} onPress={openMenu}></Button>}
+            anchor={<Button  icon='sort' textColor='#b10ce8' size={50} onPress={openMenu}></Button>}
           >
             <Menu.Item onPress={sortByName } title="İsim" />
             <Menu.Item onPress={sortByDate } title="Tarih" />
           </Menu>
         </View>
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>KONSER</Text>
+       
+            <Text style={styles.sectionTitle}>TİYATRO</Text>
+          
         </View>
         <FlatList
           data={veri}
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
-              <Image source={{ uri: item.Resim }} style={styles.image} />
+              <Image resizeMode='contain' source={{ uri: item.Resim }} style={styles.image} />
               <View style={styles.infoContainer}>
-                <Text style={ {fontSize: 18, fontWeight: '700', marginBottom: 5,color: '#C70039'}}>{item.Adi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
-                <Text style={ {fontSize: 12, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
-                <View style={{justifyContent:'center',alignItems:'center',}}>
-                <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
-                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#E2095B' }}>Detay</Text></TouchableOpacity>
+                <Text style={ {fontSize: 14, fontWeight: '700', marginBottom: 5,color: '#6805f2'}}>{item.Adi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
+                <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
+                <View style={{flexDirection:'row',margin:15}}>
+
+                  <View style={{justifyContent:'center',alignItems:'center',}}/>
+                  <TouchableOpacity style={{justifyContent:'center', marginRight:25}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#f202ca' }}>Detay</Text></TouchableOpacity>
+
+                  <View style={{justifyContent:'center',alignItems:'flex',}}/>
+                  <TouchableOpacity style={{justifyContent:'center'}} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
+                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#f202ca' }}>Konum</Text></TouchableOpacity>
+                   
                   </View>
+                   
+       
+      
+   
               </View>
             </View>
           )}
@@ -137,6 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '900',
     color: '#F8049C',
+    fontFamily:'Pacifico-Regular',
 
   },
   itemContainer: {
@@ -150,12 +173,12 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 4,
     elevation: 5,
-    height: 220,
+    height: 180,
   },
   image: {
-    width: 200,
-    height: 200,
-    marginRight: 10,
+    width: 160,
+    height: 160,
+    marginLeft:-10,
   },
   infoContainer: {
     flex: 1,
@@ -164,7 +187,7 @@ const styles = StyleSheet.create({
   },
    
   searchBarStyle: {
-     
+    backgroundColor:'white',
     borderRadius: 35,
     borderColor: '#c22f89',
     borderWidth: 0.4,
