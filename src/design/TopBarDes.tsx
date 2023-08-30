@@ -9,10 +9,10 @@ const TopBarDes = () => {
     <LinearGradient
       start={{ x: 0.0, y: 0.25 }}
       end={{ x: 0.9, y: 3 }}
-      colors={['#FFD521', '#F50000', '#B900B4']}
+      colors={['#feda75', '#fa7e1e', '#d62976','#962fbf', '#4f5bd5']}
       style={styles.topBarGradient}
     >
-      <Text style={styles.topBarText}>Show Time!  </Text>
+      <Text style={styles.topBarText}>ShowApp</Text>
       
     </LinearGradient>
   );
@@ -30,9 +30,10 @@ const styles = StyleSheet.create({
   topBarText: {
     flex: 1, 
     textAlign: 'center',  
-    fontSize: 24,
-    fontWeight: '700',
+    fontSize: 20,
+    fontFamily:'Pacifico-Regular',
     color: 'white',
+    
   },
 });
 

@@ -5,11 +5,16 @@ import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
 import LinearGradient from 'react-native-linear-gradient';
 import { LinearTextGradient } from "react-native-text-gradient";
-import {  HideNavigationBar,  ShowNavigationBar,} from 'react-native-navigation-bar-color';
-import axios from 'axios';
-StatusBar.setHidden(false,'fade');
+import SystemNavigationBar from 'react-native-system-navigation-bar';
+import MapView from 'react-native-maps';
+import MaskedView from '@react-native-masked-view/masked-view';
  
-const Theatre = () => {
+import axios from 'axios';
+StatusBar.setHidden(true);
+SystemNavigationBar.stickyImmersive();
+
+const Theatre = (props ) => {
+  
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSort, setHasSort] = useState(false);
@@ -65,7 +70,10 @@ const Theatre = () => {
 
   return (
     <Provider>
-      <View style={styles.container}>
+     
+    
+
+      <View style={styles.container}> 
         <TopBarDes />
         <View style={styles.searchBar}>
           <Searchbar
@@ -87,10 +95,15 @@ const Theatre = () => {
           </Menu>
         </View>
         <View style={styles.section}>
-       
-            <Text style={styles.sectionTitle}>TİYATRO</Text>
-          
-        </View>
+        <MaskedView maskElement={<Text style={styles.sectionTitle}>TİYATRO</Text>}>
+  <LinearGradient
+    colors={['#feda75', '#fa7e1e', '#d62976','#962fbf', '#4f5bd5']}
+    start={{ x: 0, y: 1 }}
+    end={{ x: 1, y: 0 }}>
+    <Text style={styles.sectionTitle}>TİYATRO</Text>
+  </LinearGradient>
+</MaskedView>
+</View>
         <FlatList
           data={veri}
           keyExtractor={(item, index) => index.toString()}
@@ -102,15 +115,26 @@ const Theatre = () => {
                 <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikBaslamaTarihi}</Text>
                 <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>{item.EtkinlikMerkezi}</Text>
                 <Text style={ {fontSize: 10, fontWeight: '400', marginBottom: 5,color: '#A715C4'}}>Ücretsiz Mi?  {item.UcretsizMi ? 'Evet' : 'Hayır'}</Text>
-                <View style={{justifyContent:'center',alignItems:'center',}}>
-                <TouchableOpacity style={{justifyContent:'center'}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                <View style={{flexDirection:'row',margin:15}}>
+
+                  <View style={{justifyContent:'center',alignItems:'center',}}/>
+                  <TouchableOpacity style={{justifyContent:'center', marginRight:25}} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                   <Text style={{ fontSize: 16, fontWeight: '700', color: '#f202ca' }}>Detay</Text></TouchableOpacity>
+
+                  <View style={{justifyContent:'center',alignItems:'flex',}}/>
+                  <TouchableOpacity style={{justifyContent:'center'}} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
+                  <Text style={{ fontSize: 16, fontWeight: '700', color: '#f202ca' }}>Konum</Text></TouchableOpacity>
+                   
                   </View>
+                   
+       
+      
+   
               </View>
             </View>
           )}
         />
-      </View>
+      </View>   
     </Provider>
   );
 };
@@ -141,9 +165,9 @@ const styles = StyleSheet.create({
     borderRadius:50,
   },
   sectionTitle: {
-    fontSize: 24,
-    fontWeight: '900',
-    color: '#F8049C',
+    fontSize: 18,
+    fontFamily:'Pacifico-Regular',
+    
 
   },
   itemContainer: {
