@@ -1,20 +1,26 @@
 import React from 'react';
-import {   Text, StyleSheet } from 'react-native';
+import {   Text, StyleSheet, Touchable } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
+import { Button } from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
  
  
 const TopBarDes = () => {
-  return (
+  return (<>
     <LinearGradient
       start={{ x: 0.0, y: 0.25 }}
       end={{ x: 0.9, y: 3 }}
-      colors={[ '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
+      colors={[ '#f71f6c','#5f3194', '#2521b6']}
       style={styles.topBarGradient}
     >
       <Text style={styles.topBarText}>ShowApp</Text>
       
+       
+      
+       
     </LinearGradient>
-  );
+    </>);
 };
 
 const styles = StyleSheet.create({

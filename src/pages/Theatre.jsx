@@ -82,7 +82,7 @@ const Theatre = (props) => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
-          colors={[  '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
+          colors={[  '#f71f6c','#5f3194', '#2521b6']}
           style={{flex:1}}>
           <TopBarDes />
           <View style={styles.searchBar}>
@@ -276,12 +276,12 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#4f5bd5',
+    color: 'white',
   },
   detailLocationButton:{
     height:70,
     width:50,
-    backgroundColor:'#feda75',
+    backgroundColor:'#fa006c',
     justifyContent:'center',
     alignItems:'center',
     borderRadius:20,
