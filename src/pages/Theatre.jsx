@@ -82,7 +82,8 @@ const Theatre = (props) => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
-          colors={['#ffd366', '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}>
+          colors={[  '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
+          style={{flex:1}}>
           <TopBarDes />
           <View style={styles.searchBar}>
             <Searchbar

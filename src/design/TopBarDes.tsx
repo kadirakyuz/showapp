@@ -1,15 +1,14 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import {   Text, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
  
-import Iconnn from 'react-native-vector-icons/MaterialIcons';
-
+ 
 const TopBarDes = () => {
   return (
     <LinearGradient
       start={{ x: 0.0, y: 0.25 }}
       end={{ x: 0.9, y: 3 }}
-      colors={['#ffd366', '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
+      colors={[ '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
       style={styles.topBarGradient}
     >
       <Text style={styles.topBarText}>ShowApp</Text>

@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Feather';
-import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
+ import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
 import Iconnn from 'react-native-vector-icons/FontAwesome6';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Cinema from '../pages/Cinema';
+ import Cinema from '../pages/Cinema';
 import Theatre from '../pages/Theatre';
 import InfoArea from './InfoArea';
 import Concert from '../pages/Concert';
 import Any from '../pages/Any';
-import MaskedView from '@react-native-community/masked-view'
-import Iconnnn from 'react-native-vector-icons/Foundation';
-import { getTabBarHeight } from '@react-navigation/bottom-tabs/lib/typescript/src/views/BottomTabBar';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+ import Iconnnn from 'react-native-vector-icons/Foundation';
+ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -40,7 +36,7 @@ const NavPage = () => {
           }}
           options={{
             
-            headerShown: false,
+             
             tabBarLabel: '',
             tabBarIcon: ({ size }) => (
               <Iconnn name="masks-theater" size={25} color={getTabColor('Theatre')} />
@@ -54,7 +50,7 @@ const NavPage = () => {
             tabPress: () => handleTabPress('Cinema'),
           }}
           options={{
-            headerShown: false,
+            
             tabBarLabel: '',
             tabBarIcon: () => (
               <Iconn name="movie-open" size={25} color={getTabColor('Cinema')} />
@@ -69,7 +65,7 @@ const NavPage = () => {
             tabPress: () => handleTabPress('Concert'),
           }}
           options={{
-            headerShown: false,
+            
             tabBarLabel: '',
             tabBarIcon: () => (
               <Iconn name="music-clef-treble" size={25} color={getTabColor('Concert')} />
@@ -83,27 +79,14 @@ const NavPage = () => {
             tabPress: () => handleTabPress('Any'),
           }}
           options={{
-            headerShown: false,
+            
             tabBarLabel: '',
             tabBarIcon: () => (
               <Iconn name="ticket" size={25} color={getTabColor('Any')} />
             ),
           }}
         /> 
-         <Tab.Screen
-          name="InfoArea"
-          component={InfoArea}
-          listeners={{
-            tabPress: () => handleTabPress('InfoArea'),
-          }}
-          options={{
-            headerShown: false,
-            tabBarLabel: '',
-            tabBarIcon: () => (
-              <Iconnnn name="info" size={25} color={getTabColor('InfoArea')} />
-            ),
-          }}
-        /> 
+          
       </Tab.Navigator>
     </NavigationContainer>
   );
