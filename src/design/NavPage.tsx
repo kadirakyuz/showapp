@@ -8,6 +8,7 @@ import Concert from '../pages/Concert';
 import Any from '../pages/Any';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { Dimensions, StyleSheet, View } from 'react-native';
+import Places from './Places';
 
 
 const Tab = createMaterialBottomTabNavigator();
@@ -85,7 +86,20 @@ const NavPage = () => {
             ),
           }}
         /> 
-          
+          <Tab.Screen
+          name="Places"
+          component={Places}
+          listeners={{
+            tabPress: () => handleTabPress('Places'),
+          }}
+          options={{
+            
+            tabBarLabel: '',
+            tabBarIcon: () => (
+              <Iconnn name="building-columns" size={20} color={getTabColor('Places')} />
+            ),
+          }}
+        /> 
       </Tab.Navigator>
     </NavigationContainer>
   );
