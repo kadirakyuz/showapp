@@ -80,7 +80,7 @@ const Theatre = (props) => {
     <Provider>
       <View style={styles.container}>
         <LinearGradient
-          start={{ x: 0, y: 1 }}
+          start={{ x: 0, y:1 }}
           end={{ x: 1, y: 1 }}
           colors={[  '#f71f6c','#5f3194', '#2521b6']}
           style={{flex:1}}>
@@ -201,11 +201,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 10,
     padding: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
     height: 180,
   },
   image: {
@@ -275,7 +270,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: '900',
     color: 'white',
   },
   detailLocationButton:{

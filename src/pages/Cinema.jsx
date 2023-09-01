@@ -11,7 +11,7 @@ import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
 StatusBar.setHidden(true);
 SystemNavigationBar.stickyImmersive();
 
-const Theatre = (props) => {
+const Cinema = (props) => {
   const [veri, setVeri] = useState(etkinlikler);
   const [searchQuery, setSearchQuery] = useState('');
   const [hasSort, setHasSort] = useState(false);
@@ -82,7 +82,7 @@ const Theatre = (props) => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
-          colors={[  '#ff6903', '#ec0075','#aa2cc0', '#4564dc']}
+          colors={['#f71f6c','#5f3194', '#2521b6']}
           style={{flex:1}}>
           <TopBarDes />
           <View style={styles.searchBar}>
@@ -201,11 +201,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     margin: 10,
     padding: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 5,
     height: 180,
   },
   image: {
@@ -275,18 +270,17 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 12,
-    fontWeight: '700',
-    color: '#4f5bd5',
+    fontWeight: '900',
+    color: 'white',
   },
   detailLocationButton:{
     height:70,
     width:50,
-    backgroundColor:'#feda75',
+    backgroundColor:'#fa006c',
     justifyContent:'center',
     alignItems:'center',
     borderRadius:20,
   },
  
 });
-
-export default Theatre;
+export default Cinema;

@@ -1,10 +1,9 @@
 import React from 'react';
-import {   Text, StyleSheet, Touchable } from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {   Text, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
- 
+  
+
  
 const TopBarDes = () => {
   return (<>
@@ -15,6 +14,7 @@ const TopBarDes = () => {
       style={styles.topBarGradient}
     >
       <Text style={styles.topBarText}>ShowApp</Text>
+      
       
        
       

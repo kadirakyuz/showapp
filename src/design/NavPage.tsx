@@ -25,7 +25,7 @@ const NavPage = () => {
 
   return (
     <NavigationContainer >
-       
+        
         <Tab.Navigator barStyle={styles.barStyles} > 
         <Tab.Screen   
           name="Theatre"
