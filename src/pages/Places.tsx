@@ -1,45 +1,36 @@
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  Image,
-  TouchableOpacity,
-  Linking,
-  StatusBar,ScrollView,
-} from 'react-native';
+import {View,Text,StyleSheet,FlatList,Image,TouchableOpacity,Linking,StatusBar,ScrollView,} from 'react-native';
 import etkinlikler from '../json/etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
-import TopBarDes from './TopBarDes';
+import TopBarDes from '../design/TopBarDes';
 import LinearGradient from 'react-native-linear-gradient';
 import Iconnn from 'react-native-vector-icons/FontAwesome6';
 import MaskedView from '@react-native-masked-view/masked-view';
- StatusBar.setHidden(true);
+import { sortByName } from '../layout/SortFunction';
+import SystemNavigationBar from 'react-native-system-navigation-bar';
 
-const Places = (props) => {
+
+ StatusBar.setHidden(true);
+ SystemNavigationBar.stickyImmersive();
+
+const Places = () => {
   const [veri, setVeri] = useState(etkinlikler);
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState<string>('');
   const [hasSort, setHasSort] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
-  const handleSearch = (query) => {
+  const handleSearch = (query: string) => {
     setSearchQuery(query);
-
-    const filteredData = etkinlikler.filter(
-      (item) =>
-        item.Adi.toLowerCase().includes(query.toLowerCase())
-    );
-
-    setVeri(filteredData);
+  
+   
   };
 
-  const groupEventsByCenter = (events) => {
-    const groupedEvents = {};
-
+  const groupEventsByCenter = (events: any[]) => {
+    const groupedEvents: Record<string, any[]> = {};
+  
     events.forEach((event) => {
       const center = event.EtkinlikMerkezi;
       if (!groupedEvents[center]) {
@@ -47,24 +38,19 @@ const Places = (props) => {
       }
       groupedEvents[center].push(event);
     });
-
+  
     return groupedEvents;
   };
 
   const groupedEvents = groupEventsByCenter(veri);
 
-  const sortByName = () => {
-    let sortedVeri = [...veri];
-    if (!hasSort) {
-      sortedVeri.sort((a, b) => a.Adi.localeCompare(b.Adi));
-    } else {
-      sortedVeri.sort((a, b) => b.Adi.localeCompare(a.Adi));
-    }
+  const sortDataByName = () => {
+    const sortedData = sortByName(veri, hasSort);
     setHasSort(!hasSort);
-    setVeri(sortedVeri);
+    setVeri(sortedData);
   };
 
-  const openEventUrl = (url) => {
+  const openEventUrl = (url: string) => {
     if (url) {
       const baseUrl = 'https://kultursanat.izmir.bel.tr/Etkinlikler/';
       const fullUrl = baseUrl + url;
@@ -72,20 +58,22 @@ const Places = (props) => {
     }
   };
 
-  const renderEventItem = ({ item }) => (
+  const renderEventItem = ({ item }: { item: any }) => (
     <View style={styles.itemContainer}>
       <View style={styles.infoContainer}>
         <Text style={styles.eventName}>{item.Adi}</Text>
-        
-        <View style={{ justifyContent:'center',flexDirection:'row'}}>
-        
-        <Image resizeMode='contain' source={{ uri: item.Resim }} style={styles.image} />
-        
-        <View style={{width:190,height:120}}>
-          <Text style={styles.eventType}>{item.Tur}</Text>
-        <ScrollView>
-          <Text style={styles.eventDescription}>{item.KisaAciklama}</Text></ScrollView></View>
-      </View></View>
+          
+        <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
+          <Image resizeMode='contain' source={{ uri: item.Resim }} style={styles.image} />
+          
+          <View style={{ width: 190, height: 120 }}>
+            <Text style={styles.eventType}>{item.Tur}</Text>
+            <ScrollView>
+              <Text style={styles.eventDescription}>{item.KisaAciklama}</Text>
+            </ScrollView>
+          </View>
+        </View>
+      </View>
       <View style={styles.buttonContainer2}>
         <TouchableOpacity
           style={styles.locationButton}
@@ -119,10 +107,10 @@ const Places = (props) => {
               visible={visible}
               onDismiss={closeMenu}
               anchor={
-                <Button icon="sort" textColor="white" size={50} onPress={openMenu}></Button>
+                <Button icon="sort" textColor="white" onPress={openMenu} children={undefined}></Button>
               }>
-              <Menu.Item onPress={sortByName} title="İsim" />
-            </Menu>
+                <Menu.Item onPress={sortDataByName} title="İsim" />
+             </Menu>
           </View>
           <View style={styles.section}>
             <MaskedView maskElement={<Iconnn name="building-columns" size={45}/>}>
@@ -201,6 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: '900',
     marginBottom: 5,
+    marginLeft:10,
     color: '#d600ff',
   },
   eventDescription: {
