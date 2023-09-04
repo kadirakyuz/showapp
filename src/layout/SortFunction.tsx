@@ -1,4 +1,5 @@
  
+
 export const sortByName = (data: ({ Tur: string; Id: number; Adi: string; EtkinlikBitisTarihi: string; KucukAfis: string; EtkinlikMerkezi: string; EtkinlikMerkeziKonum: string; KisaAciklama: string; BiletSatisLinki: null; UcretsizMi: boolean; Resim: string; EtkinlikUrl: string; EtkinlikBaslamaTarihi: string; } | { Tur: string; Id: number; Adi: string; EtkinlikBitisTarihi: string; KucukAfis: string; EtkinlikMerkezi: string; EtkinlikMerkeziKonum: string; KisaAciklama: string; BiletSatisLinki: string; UcretsizMi: boolean; Resim: string; EtkinlikUrl: string; EtkinlikBaslamaTarihi: string; })[], hasSort: boolean) => {
     let sortedData = [...data];
     if (!hasSort) {
