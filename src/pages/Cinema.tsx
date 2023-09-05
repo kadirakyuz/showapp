@@ -9,6 +9,7 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
 import { sortByName, sortByDate, sortByPrice } from '../layout/SortFunction';
 import StyleDesign from '../layout/StyleDesign';
+import { ScrollView } from 'react-native';
 
 StatusBar.setHidden(true);
 SystemNavigationBar.stickyImmersive();
@@ -109,22 +110,24 @@ const Cinema = () => {
               <View style={StyleDesign.itemContainer}>
                 <Image resizeMode='contain' source={{ uri: item.Resim }} style={StyleDesign.image} />
                 <View style={StyleDesign.infoContainer}>
+                <ScrollView>
+
                   <Text style={StyleDesign.eventName}>{item.Adi}</Text>
                   <Text style={StyleDesign.eventDate}>{item.EtkinlikBaslamaTarihi}</Text>
                   <Text style={StyleDesign.eventLocation}>{item.EtkinlikMerkezi}</Text>
                   <Text style={StyleDesign.eventType}>{item.Tur.charAt(0).toUpperCase() + item.Tur.slice(1).toLowerCase()}</Text>
                   <Text style={StyleDesign.eventFree}>{item.UcretsizMi ? 'Ücretsiz' : 'Ücretli'}</Text>
-                  
+                  </ScrollView>
                     
                   </View>
                   <View style={StyleDesign.buttonContainer}>
-                    <View style={StyleDesign.buttonContainer1}>
+                    <View style={StyleDesign.buttonContainerArea}>
                       <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => openEventUrl(item.EtkinlikUrl)}>
                           <Text style={StyleDesign.buttonText}>Detay</Text>
                       </TouchableOpacity>
                     </View>
 
-                    <View style={StyleDesign.buttonContainer2}>
+                    <View style={StyleDesign.buttonContainerArea}>
                       <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
                          <Text style={StyleDesign.buttonText}> Konum</Text>
                       </TouchableOpacity>

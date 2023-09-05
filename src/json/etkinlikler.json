@@ -67,7 +67,7 @@
     "KucukAfis": "https://kultursanat.izmir.bel.tr/YuklenenDosyalar/Etkinlikler/Thumb/20230711_170119_ic.jpg",
     "EtkinlikMerkezi": "Ahmed Adnan Saygun Sanat Merkezi",
     "EtkinlikMerkeziKonum":"https://www.google.com/maps/place/Ahmed+Adnan+Saygun+Sanat+Merkezi/@38.397369,27.0757354,17z/data=!3m1!4b1!4m6!3m5!1s0x14beaeb117baa7ed:0xbad7d7f2ff4beeaa!8m2!3d38.3973648!4d27.0783103!16s%2Fg%2F122_gtdm?entry=ttu",
-    "KisaAciklama": "Camda Antik İzmir Koleksiyon Sergisi 14 Temmuz - 31 Ağustos 2023 tarihleri arasında Ahmed Adnan Saygun Sanat Merkezi/Giriş Galeriler'de...",
+    "KisaAciklama": "Camda Antik İzmir Koleksiyon Sergisi 14 Temmuz - 31 Ağustos 2023 tarihleri arasında Ahmed Adnan Saygun Sanat Merkezi/Giriş Galeriler'de.",
     "BiletSatisLinki": null,
     "UcretsizMi": true,
     "Resim": "https://kultursanat.izmir.bel.tr/YuklenenDosyalar/Etkinlikler/Kucuk/20230711_170102_etkinlik.jpg",
@@ -212,7 +212,7 @@
   {
     "Tur": "KONSER",
     "Id": 5260,
-    "Adi": "Ahmed Adnan Saygun Senfoni Orkestrası Konseri",
+    "Adi": "Ahmed Adnan Saygun Orkestrası Konseri",
     "EtkinlikBitisTarihi": "2023-09-11T22:00:00",
     "KucukAfis": "https://kultursanat.izmir.bel.tr/YuklenenDosyalar/Etkinlikler/Thumb/20230824_111503_ic.jpg",
     "EtkinlikMerkezi": "Ahmed Adnan Saygun Sanat Merkezi",

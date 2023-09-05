@@ -24,11 +24,17 @@ const Places = () => {
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
+  const lowercaseQuery = query.toLowerCase();
+  const filteredData = etkinlikler.filter(
+    (item) =>
+      item.Adi.toLowerCase().includes(lowercaseQuery)
+  );
+  setVeri(filteredData);
   
    
   };
 
-  const groupEventsByCenter = (events: any[]) => {
+  const eventCenter = (events: any[]) => {
     const groupedEvents: Record<string, any[]> = {};
   
     events.forEach((event) => {
@@ -42,44 +48,40 @@ const Places = () => {
     return groupedEvents;
   };
 
-  const groupedEvents = groupEventsByCenter(veri);
+  const groupedEvents = eventCenter(veri);
 
   const sortDataByName = () => {
     const sortedData = sortByName(veri, hasSort);
     setHasSort(!hasSort);
     setVeri(sortedData);
   };
-
-  const openEventUrl = (url: string) => {
-    if (url) {
-      const baseUrl = 'https://kultursanat.izmir.bel.tr/Etkinlikler/';
-      const fullUrl = baseUrl + url;
-      Linking.openURL(fullUrl);
-    }
-  };
+ 
 
   const renderEventItem = ({ item }: { item: any }) => (
     <View style={styles.itemContainer}>
       <View style={styles.infoContainer}>
-        <Text style={styles.eventName}>{item.Adi}</Text>
+        <View style={{marginBottom:10,height:25,backgroundColor:'transparent',width:'100%',justifyContent:'center',alignItems:'center'}}>
+          <Text style={styles.eventName}>{item.Adi}</Text></View>
           
         <View style={{ justifyContent: 'center', flexDirection: 'row' }}>
           <Image resizeMode='contain' source={{ uri: item.Resim }} style={styles.image} />
-          
-          <View style={{ width: 190, height: 120 }}>
+          <View style={{flex:1}}>
+          <View style={{ width: 200, flex:1 }}>
             <Text style={styles.eventType}>{item.Tur}</Text>
             <ScrollView>
               <Text style={styles.eventDescription}>{item.KisaAciklama}</Text>
             </ScrollView>
+
+            <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.locationButton}
+              onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
+                <Text style={styles.buttonText}> Konum</Text>
+             </TouchableOpacity>
+              </View>
+            </View>
           </View>
         </View>
-      </View>
-      <View style={styles.buttonContainer2}>
-        <TouchableOpacity
-          style={styles.locationButton}
-          onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
-          <Text style={styles.buttonText}> Konum</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
@@ -127,7 +129,7 @@ const Places = () => {
             keyExtractor={(center) => center}
             renderItem={({ item: center }) => (
               <>
-                <Text style={styles.centerTitle}>{center}</Text>
+               <View style={{justifyContent:'center',alignItems:'center',margin:10,marginBottom:20}}><Text style={styles.centerTitle}>{center}</Text></View>
                 <FlatList
                   data={groupedEvents[center]}
                   keyExtractor={(event, index) => `${event.Adi}-${index}`}
@@ -158,27 +160,30 @@ const styles = StyleSheet.create({
   searchBarStyle: {
     backgroundColor: 'white',
     borderRadius: 15,
-    borderColor: '#c22f89',
-    borderWidth: 0.5,
-    paddingHorizontal: 5,
-    paddingBottom: -5,
-    width: 340,
+    borderColor: 'aqua',
+    borderWidth: 2,
+    width: 330,
     height: 55,
+    marginTop:5,
+    marginLeft:10,
   },
   centerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: 'white',
-    marginTop: 10,
-    marginLeft: 10,
+    
+    
   },
   itemContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     backgroundColor: 'white',
-    borderRadius: 20,
-    margin: 10,
+    borderRadius: 35,
+    marginHorizontal:15,
+    marginBottom:15,
     padding: 10,
-    height: 180,
+    height: 255,
+    borderWidth:3,
+    borderColor:'aqua'  
   },
   infoContainer: {
     flex: 1,
@@ -186,17 +191,19 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   eventName: {
-    fontSize: 12,
-    fontWeight: '900',
+    fontSize: 16,
+    fontWeight: '800',
     marginBottom: 5,
     marginLeft:10,
     color: '#d600ff',
+     
   },
   eventDescription: {
     fontSize: 12,
     fontWeight: '700',
     marginBottom: 5,
     color: '#ff9a00',
+    height:100,
   },
   eventType: {
     fontSize: 14,
@@ -204,12 +211,17 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     color: 'red',
   },
-  buttonContainer2: {
+  buttonContainer: {
     flexDirection: 'column',
-    backgroundColor: 'white',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
+    backgroundColor: 'red',
+    justifyContent: 'flex-end',
+    alignItems: 'flex-end',
+    borderRadius: 20,
+    height: 50,
+    width: 200,
+    borderWidth:1,
+    borderColor:'aqua'
+    
   },
   buttonText: {
     fontSize: 12,
@@ -217,28 +229,35 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   locationButton: {
-    height: 150,
-    width: 50,
+    height: 50,
+    width: 200,
     backgroundColor: '#fa006c',
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     marginTop: 5,
+    borderWidth:1,
+    borderColor:'aqua'
   },
   image: {
-    width: 140,
-    height: 140,
-    marginLeft:-15,
+    width: 150,
+    height: 200,
+    borderRadius:25,
+    marginRight:10,
+    marginTop:-5,
   },
   section: {
     justifyContent: 'center',
-    alignItems: 'center',
-    padding: 10,
-    paddingTop: 15,
-    borderBottomWidth: 1,
-    borderColor: '#F8049C',
-    marginBottom: 10,
-    borderRadius: 50,
+      alignItems: 'center',
+      padding: 15,
+      paddingTop: 15,
+      borderBottomWidth: 2,
+      marginTop:13,
+      borderColor: 'white',
+      marginBottom: 15,
+      borderRadius: 50,
+      width:'105%',
+      marginLeft:-10,
   },
 });
 
