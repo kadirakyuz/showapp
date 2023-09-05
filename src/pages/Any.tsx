@@ -69,8 +69,8 @@ const Any = () => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
-          colors={[   '#f71f6c','#5f3194', '#2521b6']}
-          style={{flex:1}}>
+          colors={['#f71f6c', '#5f3194', '#2521b6']}
+          style={{ flex: 1 }}>
           <TopBarDes />
           <View style={StyleDesign.searchBar}>
             <Searchbar
@@ -85,7 +85,7 @@ const Any = () => {
             <Menu
               visible={visible}
               onDismiss={closeMenu}
-              anchor={<Button icon='sort' textColor='white'  children={undefined} onPress={openMenu}></Button>}
+              anchor={<Button icon='sort' textColor='white' children={undefined} onPress={openMenu}></Button>}
             >
               <Menu.Item onPress={sortDataByName} title="İsim" />
               <Menu.Item onPress={sortDataByDate} title="Tarih" />
@@ -95,10 +95,10 @@ const Any = () => {
           <View style={StyleDesign.section}>
             <MaskedView maskElement={<Iconn name="ticket" size={45} />}>
               <LinearGradient
-                colors={[ '#f71f6c','#5f3194', '#2521b6']}
+                colors={['#f71f6c', '#5f3194', '#2521b6']}
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 1 }}>
-                <Iconn name="ticket" size={45}/>
+                <Iconn name="ticket" size={45} />
               </LinearGradient>
             </MaskedView>
           </View>
@@ -110,28 +110,25 @@ const Any = () => {
                 <Image resizeMode='contain' source={{ uri: item.Resim }} style={StyleDesign.image} />
                 <View style={StyleDesign.infoContainer}>
                   <ScrollView>
-                  <Text style={StyleDesign.eventName}>{item.Adi}</Text>
-                  <Text style={StyleDesign.eventDate}>{item.EtkinlikBaslamaTarihi}</Text>
-                  <Text style={StyleDesign.eventLocation}>{item.EtkinlikMerkezi}</Text>
-                  <Text style={StyleDesign.eventType}>{item.Tur.charAt(0).toUpperCase() + item.Tur.slice(1).toLowerCase()}</Text>
-                  <Text style={StyleDesign.eventFree}>{item.UcretsizMi ? 'Ücretsiz' : 'Ücretli'}</Text>
+                    <Text style={StyleDesign.eventName}>{item.Adi}</Text>
+                    <Text style={StyleDesign.eventDate}>{item.EtkinlikBaslamaTarihi}</Text>
+                    <Text style={StyleDesign.eventLocation}>{item.EtkinlikMerkezi}</Text>
+                    <Text style={StyleDesign.eventType}>{item.Tur.charAt(0).toUpperCase() + item.Tur.slice(1).toLowerCase()}</Text>
+                    <Text style={StyleDesign.eventFree}>{item.UcretsizMi ? 'Ücretsiz' : 'Ücretli'}</Text>
                   </ScrollView>
-                    
+                </View>
+                <View style={StyleDesign.buttonContainer}>
+                  <View style={StyleDesign.buttonContainerArea}>
+                    <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                      <Text style={StyleDesign.buttonText}>Detay</Text>
+                    </TouchableOpacity>
                   </View>
-                  <View style={StyleDesign.buttonContainer}>
-                    <View style={StyleDesign.buttonContainerArea}>
-                      <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => openEventUrl(item.EtkinlikUrl)}>
-                          <Text style={StyleDesign.buttonText}>Detay</Text>
-                      </TouchableOpacity>
-                    </View>
-
-                    <View style={StyleDesign.buttonContainerArea}>
-                      <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
-                         <Text style={StyleDesign.buttonText}> Konum</Text>
-                      </TouchableOpacity>
-                    </View>
-                    
-                    </View>          
+                  <View style={StyleDesign.buttonContainerArea}>
+                    <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
+                      <Text style={StyleDesign.buttonText}> Konum</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
             )}
           />
@@ -141,5 +138,4 @@ const Any = () => {
   );
 };
 
- 
 export default Any;

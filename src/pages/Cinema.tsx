@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Linking, StatusBar } from 'react-native';
+import { View, Text,FlatList, Image, TouchableOpacity, Linking, StatusBar, ScrollView } from 'react-native';
 import etkinlikler from '../json/etkinlikler.json';
 import { Searchbar, Button, Menu, Provider } from 'react-native-paper';
 import TopBarDes from '../design/TopBarDes';
@@ -9,7 +9,6 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import Iconn from 'react-native-vector-icons/MaterialCommunityIcons';
 import { sortByName, sortByDate, sortByPrice } from '../layout/SortFunction';
 import StyleDesign from '../layout/StyleDesign';
-import { ScrollView } from 'react-native';
 
 StatusBar.setHidden(true);
 SystemNavigationBar.stickyImmersive();
@@ -70,8 +69,8 @@ const Cinema = () => {
         <LinearGradient
           start={{ x: 0, y: 1 }}
           end={{ x: 1, y: 1 }}
-          colors={['#f71f6c','#5f3194', '#2521b6']}
-          style={{flex:1}}>
+          colors={['#f71f6c', '#5f3194', '#2521b6']}
+          style={{ flex: 1 }}>
           <TopBarDes />
           <View style={StyleDesign.searchBar}>
             <Searchbar
@@ -94,7 +93,7 @@ const Cinema = () => {
             </Menu>
           </View>
           <View style={StyleDesign.section}>
-            <MaskedView maskElement={<Iconn name="movie-open" size={45}/>}>
+            <MaskedView maskElement={<Iconn name="movie-open" size={45} />}>
               <LinearGradient
                 colors={['#feda75', '#fa7e1e', '#d62976','#962fbf', '#4f5bd5']}
                 start={{ x: 0, y: 0 }}
@@ -110,34 +109,26 @@ const Cinema = () => {
               <View style={StyleDesign.itemContainer}>
                 <Image resizeMode='contain' source={{ uri: item.Resim }} style={StyleDesign.image} />
                 <View style={StyleDesign.infoContainer}>
-                <ScrollView>
-
-                  <Text style={StyleDesign.eventName}>{item.Adi}</Text>
-                  <Text style={StyleDesign.eventDate}>{item.EtkinlikBaslamaTarihi}</Text>
-                  <Text style={StyleDesign.eventLocation}>{item.EtkinlikMerkezi}</Text>
-                  <Text style={StyleDesign.eventType}>{item.Tur.charAt(0).toUpperCase() + item.Tur.slice(1).toLowerCase()}</Text>
-                  <Text style={StyleDesign.eventFree}>{item.UcretsizMi ? 'Ücretsiz' : 'Ücretli'}</Text>
+                  <ScrollView>
+                    <Text style={StyleDesign.eventName}>{item.Adi}</Text>
+                    <Text style={StyleDesign.eventDate}>{item.EtkinlikBaslamaTarihi}</Text>
+                    <Text style={StyleDesign.eventLocation}>{item.EtkinlikMerkezi}</Text>
+                    <Text style={StyleDesign.eventType}>{item.Tur.charAt(0).toUpperCase() + item.Tur.slice(1).toLowerCase()}</Text>
+                    <Text style={StyleDesign.eventFree}>{item.UcretsizMi ? 'Ücretsiz' : 'Ücretli'}</Text>
                   </ScrollView>
-                    
+                </View>
+                <View style={StyleDesign.buttonContainer}>
+                  <View style={StyleDesign.buttonContainerArea}>
+                    <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => openEventUrl(item.EtkinlikUrl)}>
+                      <Text style={StyleDesign.buttonText}>Detay</Text>
+                    </TouchableOpacity>
                   </View>
-                  <View style={StyleDesign.buttonContainer}>
-                    <View style={StyleDesign.buttonContainerArea}>
-                      <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => openEventUrl(item.EtkinlikUrl)}>
-                          <Text style={StyleDesign.buttonText}>Detay</Text>
-                      </TouchableOpacity>
-                    </View>
-
-                    <View style={StyleDesign.buttonContainerArea}>
-                      <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
-                         <Text style={StyleDesign.buttonText}> Konum</Text>
-                      </TouchableOpacity>
-                    </View>
-                    
-                    </View>
-              
-              
-              
-              
+                  <View style={StyleDesign.buttonContainerArea}>
+                    <TouchableOpacity style={StyleDesign.detailLocationButton} onPress={() => Linking.openURL(item.EtkinlikMerkeziKonum)}>
+                      <Text style={StyleDesign.buttonText}> Konum</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
             )}
           />
@@ -147,5 +138,4 @@ const Cinema = () => {
   );
 };
 
- 
 export default Cinema;
